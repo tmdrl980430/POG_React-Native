@@ -8,14 +8,16 @@
 
 import React, {useEffect} from 'react';
 import SplashScreen from 'react-native-splash-screen';
-import {NavigationContainer} from '@react-navigation/native';
 import {View, Text, StyleSheet} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from './src/screens/LoginScreen';
-import SignUp from './src/screens/SignUpScreen'
-
+import SignUp from './src/screens/SignUpScreen';
+import Main from './src/screens/MainScreen';
 
 const Stack = createNativeStackNavigator();
+
+
 
 const App = () => {
     useEffect(() => {
@@ -31,8 +33,15 @@ const App = () => {
 
     return (
         <NavigationContainer>
-            <Stack.Navigator screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="Login" component={Login}/>
+            <Stack.Navigator>
+                <Stack.Group
+                    screenOptions={{
+                        headerShown: false
+                    }}>
+                    <Stack.Screen name="Login" component={Login}/>
+                    <Stack.Screen name="SignUp" component={SignUp}/>
+                    <Stack.Screen name="Main" component={Main}/>
+                </Stack.Group>
             </Stack.Navigator>
         </NavigationContainer>
     );

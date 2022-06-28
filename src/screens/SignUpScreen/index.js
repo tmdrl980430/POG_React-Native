@@ -8,8 +8,13 @@ import {
     Text
 } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import Accept from "./Accept";
+import FirstDescription from "./description";
+import SignUpHeader from "./Header";
+import SignUpForm from "./SignUpAuthform";
+import SignUpBtn from "./SignUpBtn";
 
-const SignUp = () => {
+const SignUp = ({navigation}) => {
 
     const [loading, setLoading] = useState(false)
 
@@ -22,9 +27,25 @@ const SignUp = () => {
     } else {
         return (
             <ScrollView style={styles.container}>
-                <View>
-                    <Headers/>
+                <TouchableOpacity
+                    onPress={() => navigation.replace('Login')}
+                    style={styles.logoArea}>
+                    <SignUpHeader/>
+                </TouchableOpacity>
+                <View style={styles.descriptionArea}>
+                    <FirstDescription/>
                 </View>
+                <View>
+                    <SignUpForm/>
+                </View>
+                <View>
+                    <Accept/>
+                </View>
+                <TouchableOpacity
+                    style={styles.buttonArea}
+                    onPress={() => navigation.replace('Login')}>
+                    <SignUpBtn/>
+                </TouchableOpacity>
             </ScrollView>
         )
     }
@@ -39,15 +60,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     container: {
-        flex: 1,
         backgroundColor: 'white',
         paddingLeft: wp('10%'),
         paddingRight: wp('10%')
     },
+    descriptionArea: {
+        width: wp('100%')
+    },
     logoArea: {
-        width: '100%',
-        marginTop: hp('15%'),
-        alignItems: 'center'
+        width: wp('100%'),
+        marginTop: hp('5%')
     },
     formArea: {
         width: '100%',
@@ -64,18 +86,9 @@ const styles = StyleSheet.create({
     },
     buttonArea: {
         width: '100%',
-        height: hp('5%')
-    },
-    button: {
-        backgroundColor: "#62C88E",
-        width: "100%",
-        height: "100%",
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: hp('5%')
-    },
-    buttonTitle: {
-        color: 'white'
+        height: hp('5%'),
+        marginTop: hp('5%'),
+        marginBottom: hp('3%')
     },
     signuptextArea: {
         marginTop: hp("3%"),

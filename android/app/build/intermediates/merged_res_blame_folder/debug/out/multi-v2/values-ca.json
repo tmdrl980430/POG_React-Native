@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/kimseung-ki/Documents/react/React_Study/React_Native_Study/testapp/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ca/values-ca.xml",
+            "outputFile": "/Users/kimseung-ki/Documents/react/React_Study/React_Native_Study/POG-RN/POG/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ca/values-ca.xml",
             "map": [
                 {
-                    "source": "/Users/kimseung-ki/.gradle/caches/transforms-3/92f097da2c13c17a6cb693c16e868191/transformed/core-1.5.0/res/values-ca/values-ca.xml",
+                    "source": "/Users/kimseung-ki/.gradle/caches/transforms-3/d97418f29556dc00d9262accd924e8ac/transformed/core-1.6.0/res/values-ca/values-ca.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

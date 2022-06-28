@@ -14,6 +14,9 @@ const input = (props) => {
         case "textinputRevised":
             template = <TextInput style={styles.textFormRevised} {...props}/>
             break;
+        case "signUpTextInput":
+            template = <TextInput style={styles.textSignUpInput} {...props}/>
+            break;
         default:
             return template
     }
@@ -31,7 +34,7 @@ const styles = StyleSheet.create({
         paddingRight: 5,
         marginBottom: 5
     },
-    textFormRevised : {
+    textFormRevised: {
         borderBottomWidth: 0.5,
         borderBottomColor: 'red',
         width: '100%',
@@ -39,6 +42,14 @@ const styles = StyleSheet.create({
         paddingLeft: 5,
         paddingRight: 5,
         marginBottom: 5
+    },
+    textSignUpInput: {
+        borderBottomWidth: 0.5,
+        borderBottomColor: '#DBDBDB',
+        width: '100%',
+        height: hp('4%'),
+        paddingLeft: 5,
+        paddingRight: 5
     }
 })
 

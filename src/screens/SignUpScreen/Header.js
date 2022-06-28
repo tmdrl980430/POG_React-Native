@@ -1,24 +1,26 @@
 import React from "react";
 import {View, Image, StyleSheet} from 'react-native';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+
 
 import BackImage from '../../assets/images/backbtn.png';
 
-const Header = () => {
+const SignUpHeader = () => {
 
     return (
         <View>
-            <Image style={styles.pogbotImg} source={BackImage} resizeMode={'contain'}/>
+            <Image style={styles.BackImg} source={BackImage} resizeMode={'contain'}/>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    pogbotImg: {
-        width: 12,
-        height: 12,
+    BackImg: {
+        width: wp('5%'),
+        height: hp('5%'),
         justifyContent: 'flex-start',
         resizeMode: 'contain'
     }
 })
 
-export default Header;
+export default SignUpHeader;

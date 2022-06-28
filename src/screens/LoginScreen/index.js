@@ -5,13 +5,15 @@ import {
     ActivityIndicator,
     ScrollView,
     TouchableOpacity,
-    Text
+    Text,
+    Button
 } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import AuthForm from "./LoginAuthform";
 import AuthLogo from "./AuthLogo";
+import LoginBtn from "./LoginBtn";
 
-const Login = () => {
+const Login = ({navigation}) => {
 
     const [loading, setLoading] = useState(false)
 
@@ -30,18 +32,20 @@ const Login = () => {
                 <View style={styles.formArea}>
                     <AuthForm style={styles.formArea}/>
                 </View>
-                <View style={styles.buttonArea}>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.buttonTitle}>로그인</Text>
-                    </TouchableOpacity>
-                </View>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('Main')}
+                    style={styles.buttonArea}>
+                    <LoginBtn/>
+                </TouchableOpacity>
                 <View style={styles.signuptextArea}>
                     <Text style={styles.signupQuestiontext}>또는 소셜 계정으로 로그인</Text>
                 </View>
-                
+
                 <View style={styles.signuptextArea}>
                     <Text style={styles.signupQuestiontext}>아직 회원이 아니신가요?</Text>
-                    <Text style={styles.signuptext} onPress={() => navigation.navigate('SignUp')}>회원가입하기</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+                        <Text style={styles.signuptext}>회원가입하기</Text>
+                    </TouchableOpacity>
                 </View>
             </ScrollView>
         )

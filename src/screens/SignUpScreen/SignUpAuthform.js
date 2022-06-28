@@ -15,30 +15,65 @@ const SignUpForm = () => {
         valid: false
     });
 
+    const [nameInput, setNameInput] = useState("")
+    const [uniqueNumberInput, setUniqueNumberInput] = useState("")
     const [emailInput, setEmailInput] = useState("")
     const [passwordInput, setPasswordInput] = useState("")
-
-
-    // const updateInput = (name, value) => {
-
-    // }
+    const [passwordCheckInput, setPasswordCheckInput] = useState("")
+    const [phoneNumberInput, setPhoneNumberInput] = useState("")
 
     return (
         <View>
+            <Text style={styles.titleText}>이름</Text>
+            <Input
+                value={nameInput}
+                type={"signUpTextInput"}
+                autoCapitalize={'none'}
+                keyboardType={'default'}
+                placeholder='이름을 입력해주세요'
+                onChangeText={text => setNameInput(text)}/>
+            <Text style={styles.titleText}>주민등록번호</Text>
+            <Input
+                value={uniqueNumberInput}
+                type={"signUpTextInput"}
+                autoCapitalize={'none'}
+                keyboardType={'number-pad'}
+                placeholder=''
+                onChangeText={text => setUniqueNumberInput(text)}/>
+            <Text style={styles.titleText}>이메일</Text>
             <Input
                 value={emailInput}
-                type={inputState.type}
+                type={"signUpTextInput"}
                 autoCapitalize={'none'}
                 keyboardType={'email-address'}
-                placeholder='이메일'
+                placeholder=''
                 onChangeText={text => setEmailInput(text)}/>
+            <Text style={styles.titleText}>비밀번호</Text>
             <Input
                 value={passwordInput}
-                type={inputState.type}
+                type={"signUpTextInput"}
                 autoCapitalize={'none'}
+                keyboardType={'default'}
                 secureTextEntry={true}
                 onChangeText={text => setPasswordInput(text)}
-                placeholder='비밀번호'/>
+                placeholder=''/>
+            <Text style={styles.titleText}>비밀번호 확인</Text>
+            <Input
+                value={passwordCheckInput}
+                type={"signUpTextInput"}
+                autoCapitalize={'none'}
+                secureTextEntry={true}
+                keyboardType={'default'}
+                onChangeText={text => setPasswordCheckInput(text)}
+                placeholder=''/>
+            <Text style={styles.titleText}>전화번호</Text>
+            <Input
+                value={phoneNumberInput}
+                type={"signUpTextInput"}
+                autoCapitalize={'none'}
+                keyboardType={'number-pad'}
+                onChangeText={text => setPhoneNumberInput(text)}
+                placeholder=''/>
         </View>
     )
 
@@ -53,6 +88,12 @@ const styles = StyleSheet.create({
         paddingLeft: 5,
         paddingRight: 5,
         marginBottom: 5
+    },
+    titleText: {
+        fontFamily: "Inter-Black",
+        fontSize: 16,
+        color: '#696969',
+        marginTop: 20
     }
 })
 
