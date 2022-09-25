@@ -20,7 +20,13 @@ const Navigation = () => {
         <NavigationContainer>
             <Stack.Navigator>
                 {
-                    isLogIn
+                    <Stack.Group
+                        screenOptions={{
+                            headerShown: false
+                        }}>
+                        <Stack.Screen name="Main" component={Main}/>
+                    </Stack.Group>
+                    /*isLogIn
                         ? ((
                             <Stack.Group
                                 screenOptions={{
@@ -37,7 +43,7 @@ const Navigation = () => {
                                 <Stack.Screen name="Login" component={Login}/>
                                 <Stack.Screen name="SignUp" component={SignUp}/>
                             </Stack.Group>
-                        )
+                        )*/
                 }
 
             </Stack.Navigator>
