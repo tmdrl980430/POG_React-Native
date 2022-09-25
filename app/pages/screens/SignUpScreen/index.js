@@ -5,7 +5,8 @@ import {
     ActivityIndicator,
     ScrollView,
     TouchableOpacity,
-    Text
+    Text,
+    SafeAreaView
 } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Accept from "./Accept";
@@ -26,27 +27,29 @@ const SignUp = ({navigation}) => {
         )
     } else {
         return (
-            <ScrollView style={styles.container}>
-                <TouchableOpacity
-                    onPress={() => navigation.replace('Login')}
-                    style={styles.logoArea}>
-                    <SignUpHeader/>
-                </TouchableOpacity>
-                <View style={styles.descriptionArea}>
-                    <FirstDescription/>
-                </View>
-                <View>
-                    <SignUpForm/>
-                </View>
-                <View>
-                    <Accept/>
-                </View>
-                <TouchableOpacity
-                    style={styles.buttonArea}
-                    onPress={() => navigation.replace('Login')}>
-                    <SignUpBtn/>
-                </TouchableOpacity>
-            </ScrollView>
+            <SafeAreaView style={styles.topContainer}>
+                <ScrollView style={styles.container}>
+                    <TouchableOpacity
+                        onPress={() => navigation.replace('Login')}
+                        style={styles.logoArea}>
+                        <SignUpHeader/>
+                    </TouchableOpacity>
+                    <View style={styles.descriptionArea}>
+                        <FirstDescription/>
+                    </View>
+                    <View>
+                        <SignUpForm/>
+                    </View>
+                    <View>
+                        <Accept/>
+                    </View>
+                    <TouchableOpacity
+                        style={styles.buttonArea}
+                        onPress={() => navigation.replace('Login')}>
+                        <SignUpBtn/>
+                    </TouchableOpacity>
+                </ScrollView>
+            </SafeAreaView>
         )
     }
 
@@ -59,6 +62,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
+    topContainer: {
+        backgroundColor: 'white',
+        width: wp('100%'),
+        height: hp('100%')
+    },
     container: {
         backgroundColor: 'white',
         paddingLeft: wp('10%'),
@@ -69,7 +77,7 @@ const styles = StyleSheet.create({
     },
     logoArea: {
         width: wp('100%'),
-        marginTop: hp('5%')
+        marginTop: hp('1%')
     },
     formArea: {
         width: '100%',

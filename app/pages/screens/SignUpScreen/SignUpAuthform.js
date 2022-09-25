@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {View, Image, Text, TextInput, StyleSheet} from 'react-native';
+import {TouchableOpacity} from "react-native-gesture-handler";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Input from "../../../utils/forms/input";
 
@@ -32,6 +33,8 @@ const SignUpForm = () => {
                 keyboardType={'default'}
                 placeholder='이름을 입력해주세요'
                 onChangeText={text => setNameInput(text)}/>
+            <View style={styles.lineView}/>
+
             <Text style={styles.titleText}>주민등록번호</Text>
             <Input
                 value={uniqueNumberInput}
@@ -40,6 +43,8 @@ const SignUpForm = () => {
                 keyboardType={'number-pad'}
                 placeholder=''
                 onChangeText={text => setUniqueNumberInput(text)}/>
+            <View style={styles.lineView}/>
+
             <Text style={styles.titleText}>이메일</Text>
             <Input
                 value={emailInput}
@@ -48,6 +53,8 @@ const SignUpForm = () => {
                 keyboardType={'email-address'}
                 placeholder=''
                 onChangeText={text => setEmailInput(text)}/>
+            <View style={styles.lineView}/>
+
             <Text style={styles.titleText}>비밀번호</Text>
             <Input
                 value={passwordInput}
@@ -57,6 +64,8 @@ const SignUpForm = () => {
                 secureTextEntry={true}
                 onChangeText={text => setPasswordInput(text)}
                 placeholder=''/>
+            <View style={styles.lineView}/>
+
             <Text style={styles.titleText}>비밀번호 확인</Text>
             <Input
                 value={passwordCheckInput}
@@ -66,14 +75,24 @@ const SignUpForm = () => {
                 keyboardType={'default'}
                 onChangeText={text => setPasswordCheckInput(text)}
                 placeholder=''/>
+            <View style={styles.lineView}/>
+
             <Text style={styles.titleText}>전화번호</Text>
-            <Input
-                value={phoneNumberInput}
-                type={"signUpTextInput"}
-                autoCapitalize={'none'}
-                keyboardType={'number-pad'}
-                onChangeText={text => setPhoneNumberInput(text)}
-                placeholder=''/>
+            <View style={styles.phoneArea}>
+                <Input
+                    value={phoneNumberInput}
+                    type={"cefiInput"}
+                    autoCapitalize={'none'}
+                    keyboardType={'number-pad'}
+                    onChangeText={text => setPhoneNumberInput(text)}
+                    placeholder=''/>
+                <TouchableOpacity style={styles.button}>
+                    <Text style={styles.buttonTitle}>인증하기</Text>
+                </TouchableOpacity>
+            </View>
+
+            <View style={styles.lineView}/>
+
         </View>
     )
 
@@ -94,7 +113,34 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#696969',
         marginTop: 20
-    }
+    },
+    lineView: {
+        height: hp('0.08%'),
+        backgroundColor: '#DBDBDB',
+        marginTop: hp('0.4%')
+    },
+    button: {
+        borderColor: '#DBDBDB',
+        borderWidth: hp('0.08%'),
+        height: hp('4%'),
+        width: hp('8%'),
+        flex: 1,
+        justifyContent: "center"
+    },
+    buttonTitle: {
+        color: '#DBDBDB',
+        fontSize: hp('1.6%'),
+        justifyContent: "center",
+        alignItems: 'center',
+        textAlign: 'center'
+    },
+    phoneArea: {
+        flexDirection: "row",
+        alignItems: 'center',
+        justifyContent: "center",
+        marginTop: hp('1%'),
+
+    },
 })
 
 export default SignUpForm;
