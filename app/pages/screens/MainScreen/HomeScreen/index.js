@@ -9,11 +9,11 @@ import {
     Button
 } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-const Home = () => {
+const Home = ({ navigation }) => {
     
     return (
         <View style={styles.container}>
-            
+            <Text>HOME</Text>
         </View>
     )
 }

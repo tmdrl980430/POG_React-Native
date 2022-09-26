@@ -28,6 +28,7 @@ const Main = ({navigation}) => {
 
     return (
         <Tab.Navigator
+            initialRouteName="Home"
             screenOptions={{
                 headerShown: false
             }}>
@@ -35,36 +36,36 @@ const Main = ({navigation}) => {
                 name="Home"
                 component={Home}
                 options={{
-                    tabBarIcon: () => (<Image source={HomeImage}/>),
-                    tabBarShowLabel: true,
+                    tabBarIcon: () => (<Image source={HomeImage} style={styles.img}/>),
+                    tabBarShowLabel: false,
                 }}/>
             <Tab.Screen
                 name="BookMark"
                 component={BookMark}
                 options={{
-                    tabBarIcon: () => (<Image source={BookmarkImage}/>),
-                    tabBarShowLabel: true,
+                    tabBarIcon: () => (<Image source={BookmarkImage} style={styles.img}/>),
+                    tabBarShowLabel: false,
                 }}/>
             <Tab.Screen
                 name="Search"
                 component={Search}
                 options={{
-                    tabBarShowLabel: true,
+                    tabBarShowLabel: false,
                 }}
                 />
             <Tab.Screen
                 name="More"
                 component={More}
                 options={{
-                    tabBarIcon: () => (<Image source={MoreImage}/>),
-                    tabBarShowLabel: true,
+                    tabBarIcon: () => (<Image source={MoreImage} style={styles.img}/>),
+                    tabBarShowLabel: false,
                 }}/>
             <Tab.Screen
                 name="Guard"
                 component={Guard}
                 options={{
-                    tabBarIcon: () => (<Image source={GuardImage}/>),
-                    tabBarShowLabel: true,
+                    tabBarIcon: () => (<Image source={GuardImage} style={styles.img}/>),
+                    tabBarShowLabel: false,
                 }}/>
         </Tab.Navigator>
     )
@@ -73,7 +74,13 @@ const Main = ({navigation}) => {
 const styles = StyleSheet.create({
     container : {
         backgroundColor : 'white'
+    },
+    img: {
+        width: 40,
+        height: 40,
     }
 })
 
 export default Main;
+
+//https://reactnavigation.org/docs/bottom-tab-navigator/ 참조
