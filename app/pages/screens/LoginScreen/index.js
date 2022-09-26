@@ -12,10 +12,14 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import AuthForm from "./LoginAuthform";
 import AuthLogo from "./AuthLogo";
 import LoginBtn from "./LoginBtn";
+import { isLoginRecoilState } from "../../../recoil";
+import { useRecoilState } from "recoil";
 
 const Login = ({navigation}) => {
 
     const [loading, setLoading] = useState(false)
+    const [isLogIn, setIsLogin] = useRecoilState(isLoginRecoilState);
+
 
     if (loading) {
         return (
@@ -33,7 +37,7 @@ const Login = ({navigation}) => {
                     <AuthForm style={styles.formArea}/>
                 </View>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('Main')}
+                    onPress={() => setIsLogin(true)}
                     style={styles.buttonArea}>
                     <LoginBtn/>
                 </TouchableOpacity>
