@@ -17,10 +17,11 @@ import BookMark from "./BookMarkScreen";
 import More from "./MoreScreen";
 import Guard from "./GuardScreen";
 // 이미지 파일 경로
-import HomeImage from '../../../assets/images/home.png'
-import GuardImage from '../../../assets/images/guard.png'
-import MoreImage from '../../../assets/images/more.png'
-import BookmarkImage from '../../../assets/images/bookmark.png'
+import HomeImage from '../../../assets/images/home.png';
+import GuardImage from '../../../assets/images/guard.png';
+import MoreImage from '../../../assets/images/more.png';
+import BookmarkImage from '../../../assets/images/bookmark.png';
+import SearchImage from '../../../assets/images/search.png';
 
 const Tab = createBottomTabNavigator();
 
@@ -30,7 +31,10 @@ const Main = ({navigation}) => {
         <Tab.Navigator
             initialRouteName="Home"
             screenOptions={{
-                headerShown: false
+                headerShown: false,
+                tabBarStyle: {
+                    height: 80
+                }
             }}>
             <Tab.Screen
                 name="Home"
@@ -50,6 +54,7 @@ const Main = ({navigation}) => {
                 name="Search"
                 component={Search}
                 options={{
+                    tabBarIcon: () => (<Image source={SearchImage} style={styles.searchImg}/>),
                     tabBarShowLabel: false,
                 }}
                 />
@@ -76,8 +81,12 @@ const styles = StyleSheet.create({
         backgroundColor : 'white'
     },
     img: {
-        width: 40,
-        height: 40,
+        width: 20,
+        height: 24,
+    },
+    searchImg: {
+        width: 60,
+        height: 60,
     }
 })
 
