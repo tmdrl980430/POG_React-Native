@@ -41,7 +41,7 @@ const SignUpForm = () => {
                 type={"signUpTextInput"}
                 autoCapitalize={'none'}
                 keyboardType={'number-pad'}
-                placeholder=''
+                placeholder='주민등록번호를 입력해주세요'
                 onChangeText={text => setUniqueNumberInput(text)}/>
             <View style={styles.lineView}/>
 
@@ -51,7 +51,7 @@ const SignUpForm = () => {
                 type={"signUpTextInput"}
                 autoCapitalize={'none'}
                 keyboardType={'email-address'}
-                placeholder=''
+                placeholder='이메일을 입력해주세요'
                 onChangeText={text => setEmailInput(text)}/>
             <View style={styles.lineView}/>
 
@@ -63,7 +63,7 @@ const SignUpForm = () => {
                 keyboardType={'default'}
                 secureTextEntry={true}
                 onChangeText={text => setPasswordInput(text)}
-                placeholder=''/>
+                placeholder='비밀번호를 입력해주세요'/>
             <View style={styles.lineView}/>
 
             <Text style={styles.titleText}>비밀번호 확인</Text>
@@ -74,7 +74,7 @@ const SignUpForm = () => {
                 secureTextEntry={true}
                 keyboardType={'default'}
                 onChangeText={text => setPasswordCheckInput(text)}
-                placeholder=''/>
+                placeholder='위와 똑같은 비밀번호를 입력해주세요'/>
             <View style={styles.lineView}/>
 
             <Text style={styles.titleText}>전화번호</Text>
@@ -85,7 +85,7 @@ const SignUpForm = () => {
                     autoCapitalize={'none'}
                     keyboardType={'number-pad'}
                     onChangeText={text => setPhoneNumberInput(text)}
-                    placeholder=''/>
+                    placeholder='전화번호를 입력해주세요'/>
                 <TouchableOpacity style={styles.button}>
                     <Text style={styles.buttonTitle}>인증하기</Text>
                 </TouchableOpacity>
