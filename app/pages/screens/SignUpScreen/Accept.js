@@ -18,15 +18,21 @@ const Accept = () => {
         allSelect();
     }, [isAllSelected])
 
+    useEffect(() => {
+        if(isFirstSelected && isSecondeSelected && isThirdSelected){
+            setAllSelection(true);
+        } else if(!isFirstSelected || !isSecondeSelected || !isThirdSelected){
+            setAllSelection(false);
+        } 
+    }, [isFirstSelected, isSecondeSelected, isThirdSelected])
+
     const allSelect = () => {
         if(isAllSelected === true){
             setFirstSelection(isAllSelected);
             setSecondSelection(isAllSelected);
             setThirdSelection(isAllSelected);
         } else {
-            setFirstSelection(isAllSelected);
-            setSecondSelection(isAllSelected);
-            setThirdSelection(isAllSelected);
+
         }
     }
 
@@ -50,10 +56,10 @@ const Accept = () => {
                         )
                         : (
                             <CheckBox
-                                value={isSelected}
+                                value={isAllSelected}
                                 disabled={false}
                                 tintColors={'#DBDBDB'}
-                                onValueChange={(newValue) => setSelection(newValue)}/>
+                                onValueChange={(newValue) => setAllSelection(newValue)}/>
                         )
                 }
                 <Text style={styles.AllAcceptText}>전체 약관 동의</Text>
@@ -158,7 +164,6 @@ const styles = StyleSheet.create({
         marginBottom: hp('2%')
     },
     CheckBoxContainer: {
-        display: 'flex',
         flexDirection: 'row',
         alignContent: 'center',
         alignItems: 'center'

@@ -1,5 +1,6 @@
 import React from "react";
 import {TextInput, StyleSheet} from 'react-native';
+import { withRepeat } from "react-native-reanimated";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 //재사용 가능 InputText
@@ -16,6 +17,9 @@ const input = (props) => {
             break;
         case "signUpTextInput":
             template = <TextInput style={styles.textSignUpInput} {...props}/>
+            break;
+        case "cefiInput":
+            template = <TextInput style={styles.textcefiInput} {...props}/>
             break;
         default:
             return template
@@ -44,12 +48,16 @@ const styles = StyleSheet.create({
         marginBottom: 5
     },
     textSignUpInput: {
-        borderBottomWidth: 0.5,
-        borderBottomColor: '#DBDBDB',
         width: '100%',
         height: hp('4%'),
         paddingLeft: 5,
         paddingRight: 5
+    },
+    textcefiInput: {
+        width: wp('60%'),
+        height: hp('4%'),
+        paddingLeft: 5,
+        paddingRight: 5,
     }
 })
 

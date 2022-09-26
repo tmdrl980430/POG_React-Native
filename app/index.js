@@ -40,6 +40,7 @@ const App = () => {
     return (
         <Navigation/>
     );
+
 };
 
 const styles = StyleSheet.create({
