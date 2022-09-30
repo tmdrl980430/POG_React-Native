@@ -33,7 +33,7 @@ const Main = ({navigation}) => {
             screenOptions={{
                 headerShown: false,
                 tabBarStyle: {
-                    height: 80
+                    height: 105
                 }
             }}>
             <Tab.Screen
@@ -81,12 +81,12 @@ const styles = StyleSheet.create({
         backgroundColor : 'white'
     },
     img: {
-        width: 20,
-        height: 24,
+        width: 24,
+        height: 28,
     },
     searchImg: {
-        width: 60,
-        height: 60,
+        width: 65,
+        height: 65,
     }
 })
 
