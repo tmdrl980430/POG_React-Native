@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
     View,
     StyleSheet,
@@ -7,7 +7,8 @@ import {
     TouchableOpacity,
     Text,
     Button,
-    FlatList
+    FlatList,
+    ImageBackground
 } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import HomeListItem from "../../../../components/HomeListItem";
@@ -25,24 +26,44 @@ const Home = ({ navigation }) => {
     const margins = 39 * 2;
     const numColumns = 4;
 
+    const [educationList, setEducationList] = useState([]);
+    
+    useEffect(() => {
+        setEducationList([1, 2, 3, 4])
+    }, []);
+
     return (
         <View style={styles.container}>
-            <Text>HOME</Text>
-            <View style={{paddingHorizontal: 33}}>
-                <FlatList
-                data={listItem}
-                onLayout={e => setContainerWidth(e.nativeEvent.layout.width)}
-                renderItem={({item}) => (
-                    <HomeListItem
-                        image={item[0]}
-                        text={item[1]}
-                    />
-                )}
-                keyExtractor={(item, index) => index}
-                numColumns={numColumns}
-                />
+            <ImageBackground style={styles.weatherContainer}>
+
+            </ImageBackground>
+            <View style={{height: 300, backgroundColor: "grey"}}>
+
             </View>
-            <HomeListItem image={AlarmImage} text={"text"}></HomeListItem>
+            <View style={styles.MainContainer}>
+                <View contentContainerStyle={styles.HomeListContainer}>
+                    <FlatList
+                        data={listItem}
+                        onLayout={e => setContainerWidth(e.nativeEvent.layout.width)}
+                        renderItem={({item}) => (
+                            <HomeListItem
+                                image={item[0]}
+                                text={item[1]}
+                            />
+                        )}
+                        keyExtractor={(item, index) => index}
+                        numColumns={numColumns}
+                    />
+                </View>
+                <Text style={{paddingTop: 32}}>맞춤형 사고 예방 교육</Text>
+                <FlatList
+                    data={ educationList }
+                    renderItem={({item}) =>
+                        <View style={styles.GridViewBlockStyle}>
+                            <Text style={styles.GridViewInsideTextItemStyle} > {item} </Text>
+                        </View>}
+                    numColumns={2} />
+            </View>
         </View>
     )
 }
@@ -50,10 +71,54 @@ const Home = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container : {
-        width: "100%",
+        flex: 1,
+        backgroundColor : 'black'
+    },
+    weatherContainer: {
+        flex: 1,
+        height: hp("25%"),
+        justifyContent: "center",
+        backgroundColor: "grey",
+    },
+    MainContainer :{
+        backgroundColor: "white",
+        justifyContent: "center",
+        flex: 1,
         height: "100%",
-        backgroundColor : 'white'
-    }
+        borderTopStartRadius: 12,
+        borderTopEndRadius: 12,
+        paddingStart: 34,
+        paddingEnd: 28,
+    },
+    HomeListContainer :{
+        backgroundColor: "white",
+        justifyContent: "center",
+        flex: 1,
+        marginStart: "",
+        margin: "29px 43px 32px 37px",
+        height: "100%",
+    },
+         
+        GridViewBlockStyle: {
+         
+          justifyContent: 'center',
+          flex:1,
+          alignItems: 'center',
+          height: hp("13%"),
+          margin: 5,
+          backgroundColor: '#EBEAEA',
+          borderRadius: 12,
+        }
+        ,
+         
+        GridViewInsideTextItemStyle: {
+         
+           color: '#fff',
+           padding: 10,
+           fontSize: 18,
+           justifyContent: 'center',
+           
+         },
 })
 
 export default Home;
