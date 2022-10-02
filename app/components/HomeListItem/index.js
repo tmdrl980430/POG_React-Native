@@ -4,8 +4,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 
 const HomeListItem = ({image, text}) => {
     return (
-    <View
-        style={styles.homeListItemContainer}>
+    <View style={styles.homeListItemContainer}>
         <Image source={image} style={styles.homeListItemImage}/>
         <Text style={styles.homeListItemText}>{text}</Text>
     </View>
@@ -16,21 +15,20 @@ const HomeListItem = ({image, text}) => {
 const styles = StyleSheet.create({
     homeListItemContainer: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
+        maxHeight: hp("14%"),
     },
     homeListItemImage: {
-        maxWidth: wp("22%"),
-        maxHeight: hp("20%"),
-        backgroundColor: "yellow",
+        height: hp("10%"),
         alignItems: 'center',
         justifyContent: 'center',
+        resizeMode: "contain",
     },
     homeListItemText: {
         color: "#7A7A7A",
-        fontSize: 15,
+        fontSize: wp("2%"),
         fontWeight: "500",
-        maxWidth: wp("24%"),
-        height: 18,
+        maxWidth: wp("23%"),
         textAlign: "center",
     },
 })

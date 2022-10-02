@@ -21,12 +21,17 @@ import CartImage from '../../../../assets/images/cart.png';
 
 
 const Home = ({ navigation }) => {
-    const listItem = [[AlarmImage, "사고 접수"], [KickboardImage, "이륜차"], [CarImage, "메타 트레이닝"], [PeopleImage, "원스톱 사고 처리"], [CartImage, "마켓"]];
+    const listItem = [[AlarmImage, "사고 접수"], [KickboardImage, "이륜차"], [CarImage, "메타 트레이닝"], [PeopleImage, "원스톱\u000A사고 처리"], [CartImage, "마켓"]];
     const [containerWidth, setContainerWidth] = useState(0);
+    const [danger, setDanger] = useState("위험");
+    const [dangerDescription, setDangerDescription] = useState("소나기로 노면이 미끄러우니 조심하세요");
+
     const margins = 39 * 2;
     const numColumns = 4;
 
     const [educationList, setEducationList] = useState([]);
+
+    const image = { uri: "https://reactjs.org/logo-og.png" };
     
     useEffect(() => {
         setEducationList([1, 2, 3, 4])
@@ -34,14 +39,17 @@ const Home = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <ImageBackground style={styles.weatherContainer}>
-
+            <ImageBackground source={image} resizeMode="cover" style={styles.weatherContainer}>
+                <View >
+                    <Text style={styles.dangerRateText}>오늘의 위험지수</Text>
+                    <Text style={styles.dangerDescriptionText}>{dangerDescription}</Text>
+                </View>
+                <View style={styles.dangerTextContainer}>
+                    <Text style={styles.dangerText}>{danger}</Text>
+                </View>
             </ImageBackground>
-            <View style={{height: 300, backgroundColor: "grey"}}>
-
-            </View>
-            <View style={styles.MainContainer}>
-                <View contentContainerStyle={styles.HomeListContainer}>
+            <View style={styles.mainContainer}>
+                <View>
                     <FlatList
                         data={listItem}
                         onLayout={e => setContainerWidth(e.nativeEvent.layout.width)}
@@ -55,14 +63,14 @@ const Home = ({ navigation }) => {
                         numColumns={numColumns}
                     />
                 </View>
-                <Text style={{paddingTop: 32}}>맞춤형 사고 예방 교육</Text>
+                
+                <Text style={styles.educationText}>맞춤형 사고 예방 교육</Text>
                 <FlatList
                     data={ educationList }
                     renderItem={({item}) =>
-                        <View style={styles.GridViewBlockStyle}>
-                            <Text style={styles.GridViewInsideTextItemStyle} > {item} </Text>
-                        </View>}
-                    numColumns={2} />
+                        <View style={styles.GridViewBlockStyle}></View>}
+                    numColumns={2}
+                    style={{flex: 1}} />
             </View>
         </View>
     )
@@ -75,50 +83,66 @@ const styles = StyleSheet.create({
         backgroundColor : 'black'
     },
     weatherContainer: {
-        flex: 1,
         height: hp("25%"),
-        justifyContent: "center",
-        backgroundColor: "grey",
+        flexDirection: "row",
+        paddingTop: hp("10%"),
+        paddingStart: wp("40%"),
     },
-    MainContainer :{
+    mainContainer :{
         backgroundColor: "white",
         justifyContent: "center",
         flex: 1,
-        height: "100%",
         borderTopStartRadius: 12,
         borderTopEndRadius: 12,
         paddingStart: 34,
         paddingEnd: 28,
     },
-    HomeListContainer :{
-        backgroundColor: "white",
-        justifyContent: "center",
-        flex: 1,
-        marginStart: "",
-        margin: "29px 43px 32px 37px",
-        height: "100%",
+    dangerRateText: {
+        color: "white",
+        fontSize: wp("3%"),
+        fontWeight: "700",
+        textAlign: "right",
+        marginEnd: 15,
     },
-         
-        GridViewBlockStyle: {
-         
-          justifyContent: 'center',
-          flex:1,
-          alignItems: 'center',
-          height: hp("13%"),
-          margin: 5,
-          backgroundColor: '#EBEAEA',
-          borderRadius: 12,
-        }
-        ,
-         
-        GridViewInsideTextItemStyle: {
-         
-           color: '#fff',
-           padding: 10,
-           fontSize: 18,
-           justifyContent: 'center',
-           
-         },
+    dangerDescriptionText: {
+        width: wp("25%"),
+        color: "white",
+        fontSize: wp("2%"),
+        fontWeight: "500",
+        textAlign: "right",
+        marginEnd: 25,
+    },
+    dangerTextContainer: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: hp("6%"),
+        height: hp("6%"),
+        backgroundColor: "white",
+        borderRadius: wp("6%"),
+    },
+    dangerText: {
+        color: "#F98383",
+        fontSize: wp("4%"),
+        fontWeight: "700",
+        textAlign: "center",
+    },
+    educationText: {
+        color: "black",
+        fontSize: wp("2%"),
+        fontWeight: "500",
+        paddingTop: 30,
+        paddingStart: 10,
+    },
+    GridViewBlockStyle: {
+        flex:1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: hp("16%"),
+        margin: 5,
+        backgroundColor: '#EBEAEA',
+        borderRadius: 12,
+    },
 })
 
 export default Home;
