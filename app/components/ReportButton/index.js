@@ -17,7 +17,7 @@ const ReportButton = ({text}) => {
 const styles = StyleSheet.create({
     container : {
         flex: 1,
-        maxHeight: hp("10%"),
+        maxHeight: hp("9%"),
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "white",
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     },
     text: {
         color: "#000000",
-        fontSize: wp("6%"),
+        fontSize: wp("5%"),
         textAlign: "center",
     }
 });

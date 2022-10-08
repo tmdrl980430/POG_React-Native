@@ -15,7 +15,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import ReportButton from "../../../../components/ReportButton";
 
 
-const Accident = ({ background }) => {
+const Accident = ({ type }) => {
     const [listItem, setListItem] = useState([]);
     const [containerWidth, setContainerWidth] = useState(0);
     const [danger, setDanger] = useState("위험");
@@ -27,84 +27,69 @@ const Accident = ({ background }) => {
 
     const image = { uri: "https://reactjs.org/logo-og.png" };
 
-    const report = "네, 신고해주세요"
+    type = 2;
+
+    var countDown = type == 0 ? 30 : (type == 1 ? 15 : 10);
+    const accidentOccur = type == 0 ? "경상해" : (type == 1 ? "중상해" : "치명적");
+    const askReport = `괜찮으신가요?\n신고 알림을 보낼까요?`;
+    const report119 = "119와 지정보호자에게 신고합니다";
+    const report = "네, 신고해주세요";
+    const noreport = "아니요, 괜찮아요";
+
+    const styles = StyleSheet.create({
+        container : {
+            flex: 1,
+            backgroundColor : type == 0 ? "#F4ECDC" : (type == 1 ? "#F4DCDC" : "#F88D8D"),
+        },
+        countDownText: {
+            left: "41%",
+            height: wp("18%"),
+            width: wp("18%"),
+            borderColor: "white",
+            borderWidth: wp("2%"),
+            borderRadius: wp("9%"),
+            color: type == 2 ? "white" : "black",
+            fontSize: wp("7%"),
+            fontWeight: "600",
+            textAlign: "center",
+            textAlignVertical: "center",
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: hp("20%"),
+        },
+        accidentOccurText :{
+            color: type == 2 ? "white" : "black",
+            fontSize: wp("5%"),
+            fontWeight: "400",
+            textAlign: "center",
+            marginTop: hp("2%"),
+        },
+        askReportText: {
+            color: type == 2 ? "white" : "black",
+            fontSize: wp("5%"),
+            fontWeight: "600",
+            textAlign: "center",
+            marginTop: hp("1%"),
+        },
+        report119Text: {
+            color: type == 2 ? "white" : "black",
+            fontSize: wp("3%"),
+            fontWeight: "300",
+            textAlign: "center",
+            marginTop: hp("2%"),
+        },
+    });
 
     return (
         <View style={styles.container}>
+            <Text style={styles.countDownText}>{countDown}</Text>
+            <Text style={styles.accidentOccurText}>{`${accidentOccur} 사고 발생`}</Text>
+            <Text style={styles.askReportText}>{askReport}</Text>
+            <Text style={styles.report119Text}>{report119}</Text>
             <ReportButton text={report}/>
+            <ReportButton text={noreport}/>
         </View>
     )
 }
-
-
-const styles = StyleSheet.create({
-    container : {
-        flex: 1,
-        backgroundColor : '#F4ECDC',
-    },
-    weatherContainer: {
-        height: hp("25%"),
-        flexDirection: "row",
-        paddingTop: hp("10%"),
-        paddingStart: wp("40%"),
-    },
-    mainContainer :{
-        backgroundColor: "white",
-        justifyContent: "center",
-        flex: 1,
-        borderTopStartRadius: wp("2%"),
-        borderTopEndRadius: wp("2%"),
-        paddingTop: hp("2%"),
-        paddingStart: wp("2%"),
-        paddingEnd: wp("2%"),
-    },
-    dangerRateText: {
-        color: "white",
-        fontSize: wp("5%"),
-        fontWeight: "700",
-        textAlign: "right",
-        marginEnd: wp("2%"),
-    },
-    dangerDescriptionText: {
-        width: wp("30%"),
-        color: "white",
-        fontSize: wp("3%"),
-        fontWeight: "500",
-        textAlign: "right",
-        marginEnd: wp("4%"),
-    },
-    dangerTextContainer: {
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: hp("9%"),
-        height: hp("9%"),
-        backgroundColor: "white",
-        borderRadius: hp("9%"),
-    },
-    dangerText: {
-        color: "#F98383",
-        fontSize: wp("7%"),
-        fontWeight: "700",
-        textAlign: "center",
-    },
-    educationText: {
-        color: "black",
-        fontSize: wp("4%"),
-        fontWeight: "500",
-        paddingTop: hp("2%"),
-        paddingStart: wp("3%"),
-        paddingBottom: wp("1%"),
-    },
-    GridViewBlockStyle: {
-        flex:1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: hp("15%"),
-        margin: wp("2%"),
-        backgroundColor: '#EBEAEA',
-        borderRadius: wp("2%"),
-    },
-})
 
 export default Accident;
