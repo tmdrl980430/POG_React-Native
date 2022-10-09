@@ -15,7 +15,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import ReportButton from "../../../../components/ReportButton";
 
 
-const Accident = ({ type }) => {
+const Accident = ({ route }) => {
     const [listItem, setListItem] = useState([]);
     const [containerWidth, setContainerWidth] = useState(0);
     const [danger, setDanger] = useState("위험");
@@ -26,8 +26,7 @@ const Accident = ({ type }) => {
     const [educationList, setEducationList] = useState([]);
 
     const image = { uri: "https://reactjs.org/logo-og.png" };
-
-    type = 2;
+    const { type } = route.params;
 
     var countDown = type == 0 ? 30 : (type == 1 ? 15 : 10);
     const accidentOccur = type == 0 ? "경상해" : (type == 1 ? "중상해" : "치명적");

@@ -66,7 +66,7 @@ const Home = ({ navigation }) => {
                     />
                 </View>
                 
-                <Text style={styles.educationText} onPress={() => navigation.navigate('Accident')}>맞춤형 사고 예방 교육</Text>
+                <Text style={styles.educationText} onPress={() => navigation.navigate('Accident', {type: 0})}>맞춤형 사고 예방 교육</Text>
                 <FlatList
                     data={ educationList }
                     renderItem={({item}) =>
