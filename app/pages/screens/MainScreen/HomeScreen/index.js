@@ -8,7 +8,8 @@ import {
     Text,
     Button,
     FlatList,
-    ImageBackground
+    ImageBackground,
+    TouchableWithoutFeedback
 } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import HomeListItem from "../../../../components/HomeListItem";
@@ -39,6 +40,18 @@ const Home = ({ navigation }) => {
         setEducationList([1, 2, 3, 4])
     }, []);
 
+    const changeScreen = (index) => {
+        if (index == 5) {
+            navigation.navigate('Accident', {type: 0})
+        } else if (index == 6) {
+            navigation.navigate('Accident', {type: 1})
+        } else if (index == 7) {
+            navigation.navigate('Accident', {type: 2})
+        } else {
+            alert(`${index} clicked`);
+        }
+    }
+
     return (
         <View style={styles.container}>
             <ImageBackground source={image} resizeMode="cover" style={styles.weatherContainer}>
@@ -55,11 +68,15 @@ const Home = ({ navigation }) => {
                     <FlatList
                         data={listItem}
                         onLayout={e => setContainerWidth(e.nativeEvent.layout.width)}
-                        renderItem={({item}) => (
-                            <HomeListItem
-                                image={item[0]}
-                                text={item[1]}
-                            />
+                        renderItem={({item, index}) => (
+                            <TouchableWithoutFeedback onPress={() => changeScreen(index)}>
+                                <View style={{width: wp("23%")}}>
+                                    <HomeListItem
+                                        image={item[0]}
+                                        text={item[1]}
+                                    />
+                                </View>
+                            </TouchableWithoutFeedback>
                         )}
                         keyExtractor={(item, index) => index}
                         numColumns={numColumns}
