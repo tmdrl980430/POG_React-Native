@@ -20,6 +20,7 @@ const Accident = ({ route }) => {
     const [containerWidth, setContainerWidth] = useState(0);
     const [danger, setDanger] = useState("위험");
     const [dangerDescription, setDangerDescription] = useState("소나기로 노면이 미끄러우니 조심하세요");
+    const [counter, setCounter] = useState();
 
     const numColumns = 4;
 
@@ -34,6 +35,24 @@ const Accident = ({ route }) => {
     const report119 = "119와 지정보호자에게 신고합니다";
     const report = "네, 신고해주세요";
     const noreport = "아니요, 괜찮아요";
+
+    useEffect(() => {
+        setCounter(type == 0 ? 30 : (type == 1 ? 15 : 10));
+    }, []);
+    
+    useEffect(() => {
+        let myInterval = setInterval(() => {
+            if (counter > 0) {
+                setCounter(counter - 1);
+            }
+        }, 1000);
+        if (counter <= 0) {
+            alert("자동 신고");
+        }
+        return () => {
+            clearInterval(myInterval);
+        };
+    }, [counter]);
 
     const styles = StyleSheet.create({
         container : {
@@ -81,7 +100,7 @@ const Accident = ({ route }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.countDownText}>{countDown}</Text>
+            <Text style={styles.countDownText}>{counter}</Text>
             <Text style={styles.accidentOccurText}>{`${accidentOccur} 사고 발생`}</Text>
             <Text style={styles.askReportText}>{askReport}</Text>
             <Text style={styles.report119Text}>{report119}</Text>
