@@ -6,6 +6,7 @@ import SignUp from '../screens/SignUpScreen';
 import {NavigationContainer, StackActions} from "@react-navigation/native"
 import {createNativeStackNavigator} from "@react-navigation/native-stack"
 import Main from '../screens/MainScreen';
+import Accident from '../screens/MainScreen/HomeScreen/Accident';
 import {isLoginRecoilState} from '../../recoil';
 import {useRecoilState} from 'recoil';
 
@@ -27,6 +28,7 @@ const Navigation = () => {
                                     headerShown: false
                                 }}>
                                 <Stack.Screen name="Main" component={Main}/>
+                                <Stack.Screen name="Accident" component={Accident}/>
                             </Stack.Group>
                         ))
                         : (

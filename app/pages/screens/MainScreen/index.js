@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {
     View,
+    Image,
     StyleSheet,
     ActivityIndicator,
     ScrollView,
@@ -15,6 +16,12 @@ import Search from "./SearchScreen";
 import BookMark from "./BookMarkScreen";
 import More from "./MoreScreen";
 import Guard from "./GuardScreen";
+// 이미지 파일 경로
+import HomeImage from '../../../assets/images/home.png';
+import GuardImage from '../../../assets/images/guard.png';
+import MoreImage from '../../../assets/images/more.png';
+import BookmarkImage from '../../../assets/images/bookmark.png';
+import SearchImage from '../../../assets/images/search.png';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,14 +29,49 @@ const Main = ({navigation}) => {
 
     return (
         <Tab.Navigator
+            initialRouteName="Home"
             screenOptions={{
-                headerShown: false
+                headerShown: false,
+                tabBarStyle: {
+                    height: hp("8%"),
+                }
             }}>
-            <Tab.Screen name="Home" component={Home}/>
-            <Tab.Screen name="BookMark" component={BookMark}/>
-            <Tab.Screen name="Search" component={Search}/>
-            <Tab.Screen name="More" component={More}/>
-            <Tab.Screen name="Guard" component={Guard}/>
+            <Tab.Screen
+                name="Home"
+                component={Home}
+                options={{
+                    tabBarIcon: () => (<Image source={HomeImage} style={styles.img}/>),
+                    tabBarShowLabel: false,
+                }}/>
+            <Tab.Screen
+                name="BookMark"
+                component={BookMark}
+                options={{
+                    tabBarIcon: () => (<Image source={BookmarkImage} style={styles.img}/>),
+                    tabBarShowLabel: false,
+                }}/>
+            <Tab.Screen
+                name="Search"
+                component={Search}
+                options={{
+                    tabBarIcon: () => (<Image source={SearchImage} style={styles.searchImg}/>),
+                    tabBarShowLabel: false,
+                }}
+                />
+            <Tab.Screen
+                name="More"
+                component={More}
+                options={{
+                    tabBarIcon: () => (<Image source={MoreImage} style={styles.img}/>),
+                    tabBarShowLabel: false,
+                }}/>
+            <Tab.Screen
+                name="Guard"
+                component={Guard}
+                options={{
+                    tabBarIcon: () => (<Image source={GuardImage} style={styles.img}/>),
+                    tabBarShowLabel: false,
+                }}/>
         </Tab.Navigator>
     )
 }
@@ -37,7 +79,17 @@ const Main = ({navigation}) => {
 const styles = StyleSheet.create({
     container : {
         backgroundColor : 'white'
+    },
+    img: {
+        width: wp("5%"),
+        resizeMode: "contain",
+    },
+    searchImg: {
+        width: wp("11%"),
+        resizeMode: "contain",
     }
 })
 
 export default Main;
+
+//https://reactnavigation.org/docs/bottom-tab-navigator/ 참조
