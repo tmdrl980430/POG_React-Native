@@ -47,6 +47,8 @@ const Home = ({ navigation }) => {
             navigation.navigate('Accident', {type: 1})
         } else if (index == 7) {
             navigation.navigate('Accident', {type: 2})
+        } else if (index == 0) {
+            navigation.navigate("AdditionalReport");
         } else {
             alert(`${index} clicked`);
         }

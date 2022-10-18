@@ -7,6 +7,7 @@ import {NavigationContainer, StackActions} from "@react-navigation/native"
 import {createNativeStackNavigator} from "@react-navigation/native-stack"
 import Main from '../screens/MainScreen';
 import Accident from '../screens/MainScreen/HomeScreen/Accident';
+import AdditionalReport from '../screens/MainScreen/HomeScreen/AdditionalReport';
 import {isLoginRecoilState} from '../../recoil';
 import {useRecoilState} from 'recoil';
 
@@ -29,6 +30,7 @@ const Navigation = () => {
                                 }}>
                                 <Stack.Screen name="Main" component={Main}/>
                                 <Stack.Screen name="Accident" component={Accident}/>
+                                <Stack.Screen name="AdditionalReport" component={AdditionalReport} />
                             </Stack.Group>
                         ))
                         : (
