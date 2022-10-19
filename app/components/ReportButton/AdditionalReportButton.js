@@ -24,6 +24,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         backgroundColor: "white",
         borderRadius: wp("5%"),
+        paddingStart: wp("1%"),
+        paddingEnd: wp("1%"),
         marginTop: wp("3%"),
         marginBottom: wp("3%"),
         marginStart: wp("5%"),
