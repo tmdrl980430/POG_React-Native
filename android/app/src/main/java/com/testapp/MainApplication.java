@@ -10,6 +10,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.config.ReactFeatureFlags;
 import com.facebook.soloader.SoLoader;
 import com.testapp.newarchitecture.MainApplicationReactNativeHost;
+import com.github.reactnativecommunity.location.RNLocationPackage;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 

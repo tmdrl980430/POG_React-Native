@@ -13,6 +13,7 @@ import {
     Image
 } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import RNLocation from 'react-native-location';
 import HomeListItem from "../../../../components/HomeListItem";
 
 import AlarmImage from '../../../../assets/images/alarm.png';
@@ -39,6 +40,47 @@ const Home = ({navigation}) => {
         uri: "https://reactjs.org/logo-og.png"
     };
 
+    RNLocation.configure({
+        distanceFilter: 5.0,
+        desiredAccuracy: {
+            ios: "best",
+            android: "balancedPowerAccuracy"
+        },
+    });
+
+    RNLocation.requestPermission({
+        ios: "whenInUse",
+        android: {
+          detail: "coarse"
+        }
+        }).then(granted => {
+            if (granted) {
+                this.locationSubscription = RNLocation.subscribeToLocationUpdates(locations => {
+                    console.log(locations);
+
+              /* Example location returned
+              {
+                speed: -1,
+                longitude: -0.1337,
+                latitude: 51.50998,
+                accuracy: 5,
+                heading: -1,
+                altitude: 0,
+                altitudeAccuracy: -1
+                floor: 0
+                timestamp: 1446007304457.029,
+                fromMockProvider: false
+              }
+              */
+            })
+          }
+        })
+
+        RNLocation.getLatestLocation({ timeout: 60000 })
+        .then(latestLocation => {
+            console.log("latest: ", latestLocation)
+          // Use the location here
+        })
     useEffect(() => {
         setListItem([
             [

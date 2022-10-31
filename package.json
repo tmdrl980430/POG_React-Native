@@ -21,6 +21,7 @@
     "react-native-bouncy-checkbox": "^2.1.13",
     "react-native-check-box": "^2.1.7",
     "react-native-gesture-handler": "^2.4.2",
+    "react-native-location": "^2.5.0",
     "react-native-modest-checkbox": "^3.3.0",
     "react-native-paper": "^4.12.1",
     "react-native-reanimated": "^2.8.0",

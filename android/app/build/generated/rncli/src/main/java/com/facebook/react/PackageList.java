@@ -17,6 +17,8 @@ import com.reactnativecommunity.checkbox.ReactCheckBoxPackage;
 import org.reactnative.maskedview.RNCMaskedViewPackage;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.RNGestureHandlerPackage;
+// react-native-location
+import com.github.reactnativecommunity.location.RNLocationPackage;
 // react-native-reanimated
 import com.swmansion.reanimated.ReanimatedPackage;
 // react-native-safe-area-context
@@ -73,6 +75,7 @@ public class PackageList {
       new ReactCheckBoxPackage(),
       new RNCMaskedViewPackage(),
       new RNGestureHandlerPackage(),
+      new RNLocationPackage(),
       new ReanimatedPackage(),
       new SafeAreaContextPackage(),
       new RNScreensPackage(),
