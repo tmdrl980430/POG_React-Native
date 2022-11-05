@@ -14,6 +14,8 @@ import {
 } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import RNLocation from 'react-native-location';
+import Geolocation from 'react-native-geolocation-service';
+import { getWeather, dailyForecast, showWeather, getLocation } from 'react-native-weather-api';
 import HomeListItem from "../../../../components/HomeListItem";
 
 import AlarmImage from '../../../../assets/images/alarm.png';
@@ -44,34 +46,30 @@ const Home = ({navigation}) => {
         distanceFilter: 5.0,
         desiredAccuracy: {
             ios: "best",
-            android: "balancedPowerAccuracy"
+            android: "highAccuracy"
         },
     });
 
     RNLocation.requestPermission({
         ios: "whenInUse",
         android: {
-          detail: "coarse"
+          detail: "fine"
         }
         }).then(granted => {
             if (granted) {
+                Geolocation.getCurrentPosition(
+                    (position) => {
+                      console.log("Geolocation", position);
+                    },
+                    (error) => {
+                      // See error code charts below.
+                      console.log(error.code, error.message);
+                    },
+                    { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+                );
+
                 this.locationSubscription = RNLocation.subscribeToLocationUpdates(locations => {
                     console.log(locations);
-
-              /* Example location returned
-              {
-                speed: -1,
-                longitude: -0.1337,
-                latitude: 51.50998,
-                accuracy: 5,
-                heading: -1,
-                altitude: 0,
-                altitudeAccuracy: -1
-                floor: 0
-                timestamp: 1446007304457.029,
-                fromMockProvider: false
-              }
-              */
             })
           }
         })

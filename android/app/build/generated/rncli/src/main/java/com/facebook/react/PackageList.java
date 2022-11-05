@@ -13,8 +13,12 @@ import java.util.ArrayList;
 
 // @react-native-community/checkbox
 import com.reactnativecommunity.checkbox.ReactCheckBoxPackage;
+// @react-native-community/geolocation
+import com.reactnativecommunity.geolocation.GeolocationPackage;
 // @react-native-community/masked-view
 import org.reactnative.maskedview.RNCMaskedViewPackage;
+// react-native-geolocation-service
+import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.RNGestureHandlerPackage;
 // react-native-location
@@ -73,7 +77,9 @@ public class PackageList {
     return new ArrayList<>(Arrays.<ReactPackage>asList(
       new MainReactPackage(mConfig),
       new ReactCheckBoxPackage(),
+      new GeolocationPackage(),
       new RNCMaskedViewPackage(),
+      new RNFusedLocationPackage(),
       new RNGestureHandlerPackage(),
       new RNLocationPackage(),
       new ReanimatedPackage(),
