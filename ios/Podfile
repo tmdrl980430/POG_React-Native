@@ -19,6 +19,8 @@ target 'testapp' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  pod 'react-native-sms', :path => '../node_modules/react-native-sms'
+
   target 'testappTests' do
     inherit! :complete
     # Pods for testing

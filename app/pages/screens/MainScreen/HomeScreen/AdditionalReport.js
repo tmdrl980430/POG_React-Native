@@ -11,6 +11,7 @@ import {
     ImageBackground
 } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import SendSMS from 'react-native-sms';
 
 import ReportButton from "../../../../components/ReportButton";
 import AdditionalReportButton from '../../../../components/ReportButton/AdditionalReportButton';
@@ -27,6 +28,19 @@ const AdditionalReport = () => {
     const guardian = ["지정보호자", "지인에게 알려주세요"];
     const noreport = "아니요, 괜찮아요";
 
+    const sendMessage = () => {
+        SendSMS.send({
+            body: 'The default body of the SMS!',
+            recipients: ['01024505706'],
+            successTypes: ['sent', 'queued'],
+            allowAndroidSendWithoutReadPermission: true
+        }, (completed, cancelled, error) => {
+     
+            console.log('SMS Callback: completed: ' + completed + ' cancelled: ' + cancelled + ' error: ' + error);
+     
+        });
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.noAutoReportText}>{noautoreport}</Text>
@@ -34,7 +48,7 @@ const AdditionalReport = () => {
             <AdditionalReportButton target={report119[0]} text={report119[1]}/>
             <AdditionalReportButton target={report112[0]} text={report112[1]}/>
             <AdditionalReportButton target={insurance[0]} text={insurance[1]}/>
-            <AdditionalReportButton target={guardian[0]} text={guardian[1]}/>
+            <AdditionalReportButton target={guardian[0]} text={guardian[1]} onPress={() => sendMessage()}/>
             <View style={{height: hp("18%"), paddingTop: hp("3%")}}>
                 <ReportButton text={noreport} />
             </View>
