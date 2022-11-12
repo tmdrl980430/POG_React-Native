@@ -3,14 +3,15 @@ import {
   View,
   StyleSheet,
   Text,
+  TouchableOpacity
 } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
-const ReportButton = ({text}) => {
+const ReportButton = ({text, onPress}) => {
     return(
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={onPress}>
             <Text style={styles.text}>{text}</Text>
-        </View>
+        </TouchableOpacity>
     );
 }
 

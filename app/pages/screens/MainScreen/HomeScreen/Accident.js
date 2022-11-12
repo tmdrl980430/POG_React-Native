@@ -11,7 +11,7 @@ import {
     ImageBackground
 } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-
+import SendSMS from 'react-native-sms';
 import ReportButton from "../../../../components/ReportButton";
 
 
@@ -88,14 +88,34 @@ const Accident = ({ route, navigation }) => {
         },
     });
 
+    const cancelCount = () => {
+        navigation.pop();
+    }
+    
+    const reportAccident = () => {
+        // 지정 보호자, 119에 신고
+
+        SendSMS.send({
+            body: `님에게 사고가 발생했습니다.`,
+            recipients: ['01024505706', '119'],
+            successTypes: ['sent', 'queued'],
+            allowAndroidSendWithoutReadPermission: true
+        }, (completed, cancelled, error) => {
+     
+            console.log('SMS Callback: completed: ' + completed + ' cancelled: ' + cancelled + ' error: ' + error);
+     
+        });
+        navigation.pop();
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.countDownText}>{counter}</Text>
             <Text style={styles.accidentOccurText}>{`${accidentOccur} 사고 발생`}</Text>
             <Text style={styles.askReportText}>{askReport}</Text>
             <Text style={styles.report119Text}>{report119}</Text>
-            <ReportButton text={report}/>
-            <ReportButton text={noreport}/>
+            <ReportButton text={report} onPress={() => reportAccident()}/>
+            <ReportButton text={noreport} onPress={() => cancelCount()}/>
         </View>
     )
 }
