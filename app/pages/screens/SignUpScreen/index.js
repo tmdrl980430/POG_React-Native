@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
     View,
     StyleSheet,
@@ -14,10 +14,88 @@ import FirstDescription from "./description";
 import SignUpHeader from "./Header";
 import SignUpForm from "./SignUpAuthform";
 import SignUpBtn from "./SignUpBtn";
+import axios from "axios";
+import { useRecoilState } from "recoil";
+import { severURLRecoilState, userIdxRecoilState } from "../../../recoil";
 
 const SignUp = ({navigation}) => {
 
+    const [IP, setIP] = useRecoilState(severURLRecoilState);
+    const [userIdx, setUserIdx] = useRecoilState(userIdxRecoilState);
+    
     const [loading, setLoading] = useState(false)
+    const [error , setError] = useState(false)
+    const [signUp , setSignUp] = useState(false)
+
+    const [nameInput, setNameInput] = useState("")
+    const [uniqueNumberInput, setUniqueNumberInput] = useState("")
+    const [emailInput, setEmailInput] = useState("")
+    const [passwordInput, setPasswordInput] = useState("")
+    const [passwordCheckInput, setPasswordCheckInput] = useState("")
+    const [phoneNumberInput, setPhoneNumberInput] = useState("")
+
+    useEffect(() => {
+        console.log("nameInput",nameInput)
+        console.log("uniqueNumberInput",uniqueNumberInput)
+        console.log("emailInput",emailInput)
+        console.log("passwordInput",passwordInput)
+        console.log("passwordCheckInput",passwordCheckInput)
+        console.log("phoneNumberInput",phoneNumberInput)
+
+    },[nameInput, uniqueNumberInput, emailInput, passwordInput, passwordCheckInput, phoneNumberInput]);
+
+
+    const postSignUp = async () => {
+
+        console.log("signUp_start")
+        if (passwordInput != "" && passwordCheckInput != "" && phoneNumberInput != "" && nameInput != "" && uniqueNumberInput != "" && emailInput != "") {
+            try {
+                console.log("signUp_try")
+                // 요청이 시작 할 때에는 error 와 users 를 초기화하고
+                setError(null);
+                setSignUp(null);
+
+                // loading 상태를 true 로 바꿉니다.
+                setLoading(true);
+
+                if (passwordInput != passwordCheckInput) {
+                    //비밀번호가 같지 않을때
+                } else if (passwordInput == passwordCheckInput) {
+                    const response = await axios
+                    .post(`${IP}/users`, {
+                        email: emailInput,
+                        ssn: uniqueNumberInput,
+                        password: passwordInput,
+                        passwordConfirm: passwordCheckInput,
+                        name: nameInput,
+                        phoneNum: phoneNumberInput
+                    })
+                    .then((response) => {
+                        console.log(response);
+                        console.log(response.data.result.code)
+                        if(response.data.code === 1000 ){
+                            setUserIdx(response.data.result.userId)
+                            console.log("signUp_성공")
+                            navigation.replace('Login')
+                        }
+
+                        return response;
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+                }
+                // 데이터는 response.data.code 안에 들어있다.
+                setSignUp(response.data.code);
+            } catch (e) {
+                console.log("signUp_catch",e)
+            }
+            // loading 끄기
+            setLoading(false);
+        }
+
+    };
+
 
     if (loading) {
         return (
@@ -38,14 +116,26 @@ const SignUp = ({navigation}) => {
                         <FirstDescription/>
                     </View>
                     <View>
-                        <SignUpForm/>
+                        <SignUpForm
+                        setEmailInput={setEmailInput}
+                        setNameInput={setNameInput}
+                        setUniqueNumberInput={setUniqueNumberInput}
+                        setPasswordInput={setPasswordInput}
+                        setPasswordCheckInput={setPasswordCheckInput}
+                        setPhoneNumberInput={setPhoneNumberInput}
+                        emailInput={emailInput}
+                        nameInput={nameInput}
+                        uniqueNumberInput={uniqueNumberInput}
+                        passwordInput={passwordInput}
+                        passwordCheckInput={passwordCheckInput}
+                        phoneNumberInput={phoneNumberInput}/>
                     </View>
                     <View>
                         <Accept/>
                     </View>
                     <TouchableOpacity
                         style={styles.buttonArea}
-                        onPress={() => navigation.replace('Login')}>
+                        onPress={postSignUp}>
                         <SignUpBtn/>
                     </TouchableOpacity>
                 </ScrollView>

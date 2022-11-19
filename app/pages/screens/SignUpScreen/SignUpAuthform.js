@@ -4,77 +4,70 @@ import {TouchableOpacity} from "react-native-gesture-handler";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Input from "../../../utils/forms/input";
 
-const SignUpForm = () => {
-
-    const [nameInput, setNameInput] = useState("")
-    const [uniqueNumberInput, setUniqueNumberInput] = useState("")
-    const [emailInput, setEmailInput] = useState("")
-    const [passwordInput, setPasswordInput] = useState("")
-    const [passwordCheckInput, setPasswordCheckInput] = useState("")
-    const [phoneNumberInput, setPhoneNumberInput] = useState("")
+const SignUpForm = (props) => {
 
     return (
         <View>
             <Text style={styles.titleText}>이름</Text>
             <Input
-                value={nameInput}
+                value={props.nameInput}
                 type={"signUpTextInput"}
                 autoCapitalize={'none'}
                 keyboardType={'default'}
                 placeholder='이름을 입력해주세요'
-                onChangeText={text => setNameInput(text)}/>
+                onChangeText={text => props.setNameInput(text)}/>
             <View style={styles.lineView}/>
 
             <Text style={styles.titleText}>주민등록번호</Text>
             <Input
-                value={uniqueNumberInput}
+                value={props.uniqueNumberInput}
                 type={"signUpTextInput"}
                 autoCapitalize={'none'}
                 keyboardType={'number-pad'}
                 placeholder='주민등록번호를 입력해주세요'
-                onChangeText={text => setUniqueNumberInput(text)}/>
+                onChangeText={text => props.setUniqueNumberInput(text)}/>
             <View style={styles.lineView}/>
 
             <Text style={styles.titleText}>이메일</Text>
             <Input
-                value={emailInput}
+                value={props.emailInput}
                 type={"signUpTextInput"}
                 autoCapitalize={'none'}
                 keyboardType={'email-address'}
                 placeholder='이메일을 입력해주세요'
-                onChangeText={text => setEmailInput(text)}/>
+                onChangeText={text => props.setEmailInput(text)}/>
             <View style={styles.lineView}/>
 
             <Text style={styles.titleText}>비밀번호</Text>
             <Input
-                value={passwordInput}
+                value={props.passwordInput}
                 type={"signUpTextInput"}
                 autoCapitalize={'none'}
                 keyboardType={'default'}
                 secureTextEntry={true}
-                onChangeText={text => setPasswordInput(text)}
+                onChangeText={text => props.setPasswordInput(text)}
                 placeholder='비밀번호를 입력해주세요'/>
             <View style={styles.lineView}/>
 
             <Text style={styles.titleText}>비밀번호 확인</Text>
             <Input
-                value={passwordCheckInput}
+                value={props.passwordCheckInput}
                 type={"signUpTextInput"}
                 autoCapitalize={'none'}
                 secureTextEntry={true}
                 keyboardType={'default'}
-                onChangeText={text => setPasswordCheckInput(text)}
+                onChangeText={text => props.setPasswordCheckInput(text)}
                 placeholder='위와 똑같은 비밀번호를 입력해주세요'/>
             <View style={styles.lineView}/>
 
             <Text style={styles.titleText}>전화번호</Text>
             <View style={styles.phoneArea}>
                 <Input
-                    value={phoneNumberInput}
+                    value={props.phoneNumberInput}
                     type={"cefiInput"}
                     autoCapitalize={'none'}
-                    keyboardType={'number-pad'}
-                    onChangeText={text => setPhoneNumberInput(text)}
+                    keyboardType={'default'}
+                    onChangeText={text => props.setPhoneNumberInput(text)}
                     placeholder='전화번호를 입력해주세요'/>
                 <TouchableOpacity style={styles.button}>
                     <Text style={styles.buttonTitle}>인증하기</Text>

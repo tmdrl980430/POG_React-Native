@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
     View,
     Image,
@@ -22,10 +22,31 @@ import GuardImage from '../../../assets/images/guard.png';
 import MoreImage from '../../../assets/images/more.png';
 import BookmarkImage from '../../../assets/images/bookmark.png';
 import SearchImage from '../../../assets/images/search.png';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Tab = createBottomTabNavigator();
 
 const Main = ({navigation}) => {
+
+    useEffect(() => {
+        getJwt();
+    }, [])
+
+    const getJwt = async () => {
+        console.log("getJwt Main")
+        const value = await AsyncStorage.getItem('jwt')
+        console.log("getJwt Main에서 JWT", value)
+        try {
+            console.log("value",value)
+            if (value !== null) {
+                // value previously stored
+            }
+        } catch (e) {
+            // error reading value
+            console.log("e : " ,e)
+
+        }
+    }
 
     return (
         <Tab.Navigator

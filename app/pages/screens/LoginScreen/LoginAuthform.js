@@ -3,7 +3,7 @@ import {View, Image, Text, TextInput, StyleSheet} from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import Input from "../../../utils/forms/input";
 
-const AuthForm = () => {
+const AuthForm = (props) => {
     const [inputState, setInputState] = useState({
         type: 'Login',
         action: 'Login',
@@ -16,10 +16,6 @@ const AuthForm = () => {
     });
 
 
-    const [emailInput, setEmailInput] = useState("")
-    const [passwordInput, setPasswordInput] = useState("")
-
-
     // const updateInput = (name, value) => {
 
     // }
@@ -27,18 +23,18 @@ const AuthForm = () => {
     return (
         <View>
             <Input
-                value={emailInput}
+                value={props.emailInput}
                 type={inputState.type}
                 autoCapitalize={'none'}
                 keyboardType={'email-address'}
                 placeholder='이메일'
-                onChangeText={text => setEmailInput(text)}/>
+                onChangeText={text => props.setEmailInput(text)}/>
             <Input
-                value={passwordInput}
+                value={props.passwordInput}
                 type={inputState.type}
                 autoCapitalize={'none'}
                 secureTextEntry={true}
-                onChangeText={text => setPasswordInput(text)}
+                onChangeText={text => props.setPasswordInput(text)}
                 placeholder='비밀번호'/>
         </View>
     )

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
     View,
     StyleSheet,
@@ -8,38 +8,118 @@ import {
     Text,
     Button
 } from 'react-native';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import AuthForm from "./LoginAuthform";
 import AuthLogo from "./AuthLogo";
 import LoginBtn from "./LoginBtn";
-import { isLoginRecoilState } from "../../../recoil";
+import { isLoginRecoilState, jwtRecoilState, severURLRecoilState, userIdxRecoilState } from "../../../recoil";
 import { useRecoilState } from "recoil";
+import axios from "axios";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Login = ({navigation}) => {
+
+const Login = ({ navigation }) => {
+
+    const [IP, setIP] = useRecoilState(severURLRecoilState);
 
     const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(false)
     const [isLogIn, setIsLogin] = useRecoilState(isLoginRecoilState);
 
+    const [emailInput, setEmailInput] = useState("")
+    const [passwordInput, setPasswordInput] = useState("")
+
+    const [jwt, setJwt] = useRecoilState(jwtRecoilState);
+
+    const [userIdx, setUserIdx] = useRecoilState(userIdxRecoilState);
+
+
+    useEffect(() => {
+        storeJwt(jwt);
+
+    }, [jwt])
+
+    const storeJwt = async (value) => {
+        console.log("storeJwt")
+
+        try {
+            await AsyncStorage.setItem(`jwt`, value)
+            setJwt(value);
+        } catch (e) {
+            // saving error
+            console.log("e ::", e)
+
+        }
+        const AsyncJwt = await AsyncStorage.getItem('jwt')
+        console.log("AsyncStorage jwt ", AsyncJwt)
+    }
+
+    const postLogin = async () => {
+
+        console.log("postLogin_start")
+        if (passwordInput != "" && emailInput != "") {
+            try {
+                console.log("postLogin_try")
+                // 요청이 시작 할 때에는 error 와 users 를 초기화하고
+                setError(null);
+                // loading 상태를 true 로 바꿉니다.
+                setLoading(true);
+
+                const response = await axios
+                    .post(`${IP}/auth/login`, {
+                        email: emailInput,
+                        password: passwordInput,
+                    })
+                    .then((response) => {
+                        console.log(response);
+                        console.log(response.data.result.jwt)
+                        if (response.data.code === 1000) {
+                            setJwt(response.data.result.jwt)
+                            storeJwt(response.data.result.jwt)
+                            setUserIdx(response.data.result.userId)
+                            console.log("postLogin_성공")
+                            setIsLogin(true)
+                        }
+
+                        return response;
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+                // 데이터는 response.data.code 안에 들어있다.
+            } catch (e) {
+                console.log("signUp_catch", e)
+            }
+            // loading 끄기
+            setLoading(false);
+        }
+
+    };
 
     if (loading) {
         return (
             <View style={styles.loading}>
-                <ActivityIndicator/>
+                <ActivityIndicator />
             </View>
         )
     } else {
         return (
             <ScrollView style={styles.container}>
                 <View style={styles.logoArea}>
-                    <AuthLogo/>
+                    <AuthLogo />
                 </View>
                 <View style={styles.formArea}>
-                    <AuthForm style={styles.formArea}/>
+                    <AuthForm style={styles.formArea}
+                        emailInput={emailInput}
+                        passwordInput={passwordInput}
+                        setEmailInput={setEmailInput}
+                        setPasswordInput={setPasswordInput}
+                    />
                 </View>
                 <TouchableOpacity
-                    onPress={() => setIsLogin(true)}
+                    onPress={postLogin}
                     style={styles.buttonArea}>
-                    <LoginBtn/>
+                    <LoginBtn />
                 </TouchableOpacity>
                 <View style={styles.signuptextArea}>
                     <Text style={styles.signupQuestiontext}>또는 소셜 계정으로 로그인</Text>
