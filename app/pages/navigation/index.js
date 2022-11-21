@@ -33,8 +33,8 @@ const Navigation = () => {
     const getJwt = async () => {
         console.log("getJwt")
 
-        const value = await AsyncStorage.getItem('jwt')
-        console.log("getJwt에서 JWT", value)
+        const value = JSON.parse(await AsyncStorage.getItem("jwt"))
+        console.log("getJwt에서 JWT", AsyncStorage.getAllKeys())
         try {
             console.log("value", value)
             if (value !== null) {

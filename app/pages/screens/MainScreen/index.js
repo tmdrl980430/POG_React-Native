@@ -34,8 +34,8 @@ const Main = ({navigation}) => {
 
     const getJwt = async () => {
         console.log("getJwt Main")
-        const value = await AsyncStorage.getItem('jwt')
-        console.log("getJwt Main에서 JWT", value)
+        const value = await AsyncStorage.getItem("jwt")
+        console.log("getJwt Main에서 JWT", AsyncStorage.getAllKeys())
         try {
             console.log("value",value)
             if (value !== null) {

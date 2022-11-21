@@ -12,6 +12,9 @@ import {View, Text, StyleSheet, LogBox} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Navigation from './pages/navigation';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useRecoilState } from 'recoil';
+import { jwtRecoilState } from './recoil';
 //react-native warning 화면을 무시하기 위한 코드
 
 LogBox.ignoreLogs([
@@ -21,6 +24,7 @@ LogBox.ignoreLogs([
 
 const App = () => {
 
+    const [jwt, setJwt] = useRecoilState(jwtRecoilState)
     
     useEffect(() => {
         try {
