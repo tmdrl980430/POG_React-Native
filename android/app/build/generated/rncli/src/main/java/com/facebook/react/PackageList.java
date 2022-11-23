@@ -25,6 +25,8 @@ import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
 import com.swmansion.gesturehandler.RNGestureHandlerPackage;
 // react-native-location
 import com.github.reactnativecommunity.location.RNLocationPackage;
+// react-native-mmkv
+import com.reactnativemmkv.MmkvPackage;
 // react-native-reanimated
 import com.swmansion.reanimated.ReanimatedPackage;
 // react-native-safe-area-context
@@ -87,6 +89,7 @@ public class PackageList {
       new RNFusedLocationPackage(),
       new RNGestureHandlerPackage(),
       new RNLocationPackage(),
+      new MmkvPackage(),
       new ReanimatedPackage(),
       new SafeAreaContextPackage(),
       new RNScreensPackage(),

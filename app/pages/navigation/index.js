@@ -11,8 +11,7 @@ import AdditionalReport from '../screens/MainScreen/HomeScreen/AdditionalReport'
 import { isLoginRecoilState, jwtRecoilState, severURLRecoilState, userIdxRecoilState } from '../../recoil';
 import { useRecoilState } from 'recoil';
 import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { mmkvStorage } from '../../utils/mmkv';
 
 const Stack = createNativeStackNavigator()
 
@@ -35,12 +34,7 @@ const Navigation = () => {
     const getJwt = async () => {
         console.log("getJwt")
 
-        //const value = JSON.parse(await AsyncStorage.getItem("jwt"))
-        var value;
-        await AsyncStorage.getItem("jwt").then((v) => {
-            value = JSON.stringify(v);
-        })
-        console.log("getJwt에서 JWT", AsyncStorage.getAllKeys())
+        const value = mmkvStorage.getString("jwt");
         try {
             console.log("value", value)
             if (value !== null) {

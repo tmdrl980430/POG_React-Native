@@ -14,8 +14,8 @@ import AuthLogo from "./AuthLogo";
 import LoginBtn from "./LoginBtn";
 import { isLoginRecoilState, jwtRecoilState, severURLRecoilState, userIdxRecoilState } from "../../../recoil";
 import { useRecoilState } from "recoil";
+import { mmkvStorage } from '../../../utils/mmkv';
 import axios from "axios";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Login = ({ navigation }) => {
@@ -36,22 +36,21 @@ const Login = ({ navigation }) => {
 
     useEffect(() => {
         storeJwt(jwt);
-
     }, [jwt])
 
     const storeJwt = async (value) => {
         console.log("storeJwt")
-
+        if (value == null || value == "") return;
         try {
-            await AsyncStorage.setItem(`jwt`, value)
+            mmkvStorage.set("jwt", value);
+            console.log("type ", typeof(value));
             setJwt(value);
         } catch (e) {
             // saving error
             console.log("e ::", e)
 
         }
-        const AsyncJwt = await AsyncStorage.getItem('jwt')
-        console.log("AsyncStorage jwt ", AsyncJwt)
+        console.log("mmkvStorage jwt ", mmkvStorage.getString('jwt'));
     }
 
     const postLogin = async () => {
