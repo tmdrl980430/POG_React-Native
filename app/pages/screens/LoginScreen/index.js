@@ -33,18 +33,11 @@ const Login = ({ navigation }) => {
 
     const [userIdx, setUserIdx] = useRecoilState(userIdxRecoilState);
 
-
-    useEffect(() => {
-        storeJwt(jwt);
-
-    }, [jwt])
-
     const storeJwt = async (value) => {
         console.log("storeJwt")
 
         try {
             await AsyncStorage.setItem(`jwt`, value)
-            setJwt(value);
         } catch (e) {
             // saving error
             console.log("e ::", e)
