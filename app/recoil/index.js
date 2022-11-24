@@ -15,3 +15,10 @@ export const isLoginRecoilState = atom(
     {key: 'isLoginRecoilState', default: false}
 );
 
+export const insuranceCompanyNumber = atom(
+    {key: 'insuranceCompanyNumber', default: ''}
+);
+
+export const protectorNumber = atom(
+    {key: 'protectorNumber', default: '01000000000'}
+);

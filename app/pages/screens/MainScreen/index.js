@@ -23,6 +23,7 @@ import MoreImage from '../../../assets/images/more.png';
 import BookmarkImage from '../../../assets/images/bookmark.png';
 import SearchImage from '../../../assets/images/search.png';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { mmkvStorage } from "../../../utils/mmkv";
 
 const Tab = createBottomTabNavigator();
 
@@ -34,8 +35,7 @@ const Main = ({navigation}) => {
 
     const getJwt = async () => {
         console.log("getJwt Main")
-        const value = await AsyncStorage.getItem("jwt")
-        console.log("getJwt Main에서 JWT", AsyncStorage.getAllKeys())
+        const value = mmkvStorage.getString("jwt");
         try {
             console.log("value",value)
             if (value !== null) {

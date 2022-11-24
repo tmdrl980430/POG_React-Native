@@ -11,25 +11,14 @@ import {
     ImageBackground
 } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
-
+import SendSMS from 'react-native-sms';
 import ReportButton from "../../../../components/ReportButton";
 
 
-const Accident = ({ route }) => {
-    const [listItem, setListItem] = useState([]);
-    const [containerWidth, setContainerWidth] = useState(0);
-    const [danger, setDanger] = useState("위험");
-    const [dangerDescription, setDangerDescription] = useState("소나기로 노면이 미끄러우니 조심하세요");
+const Accident = ({ route, navigation }) => {
     const [counter, setCounter] = useState();
-
-    const numColumns = 4;
-
-    const [educationList, setEducationList] = useState([]);
-
-    const image = { uri: "https://reactjs.org/logo-og.png" };
     const { type } = route.params;
 
-    var countDown = type == 0 ? 30 : (type == 1 ? 15 : 10);
     const accidentOccur = type == 0 ? "경상해" : (type == 1 ? "중상해" : "치명적");
     const askReport = `괜찮으신가요?\n신고 알림을 보낼까요?`;
     const report119 = "119와 지정보호자에게 신고합니다";
@@ -47,7 +36,8 @@ const Accident = ({ route }) => {
             }
         }, 1000);
         if (counter <= 0) {
-            alert("자동 신고");
+            navigation.pop();
+            navigation.navigate("AdditionalReport");
         }
         return () => {
             clearInterval(myInterval);
@@ -98,14 +88,34 @@ const Accident = ({ route }) => {
         },
     });
 
+    const cancelCount = () => {
+        navigation.pop();
+    }
+    
+    const reportAccident = () => {
+        // 지정 보호자, 119에 신고
+
+        SendSMS.send({
+            body: `님에게 사고가 발생했습니다.`,
+            recipients: ['01024505706', '119'],
+            successTypes: ['sent', 'queued'],
+            allowAndroidSendWithoutReadPermission: true
+        }, (completed, cancelled, error) => {
+     
+            console.log('SMS Callback: completed: ' + completed + ' cancelled: ' + cancelled + ' error: ' + error);
+     
+        });
+        navigation.pop();
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.countDownText}>{counter}</Text>
             <Text style={styles.accidentOccurText}>{`${accidentOccur} 사고 발생`}</Text>
             <Text style={styles.askReportText}>{askReport}</Text>
             <Text style={styles.report119Text}>{report119}</Text>
-            <ReportButton text={report}/>
-            <ReportButton text={noreport}/>
+            <ReportButton text={report} onPress={() => reportAccident()}/>
+            <ReportButton text={noreport} onPress={() => cancelCount()}/>
         </View>
     )
 }

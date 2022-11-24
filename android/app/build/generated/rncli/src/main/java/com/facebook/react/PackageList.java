@@ -11,18 +11,30 @@ import com.facebook.react.shell.MainReactPackage;
 import java.util.Arrays;
 import java.util.ArrayList;
 
+// @react-native-async-storage/async-storage
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 // @react-native-community/checkbox
 import com.reactnativecommunity.checkbox.ReactCheckBoxPackage;
+// @react-native-community/geolocation
+import com.reactnativecommunity.geolocation.GeolocationPackage;
 // @react-native-community/masked-view
 import org.reactnative.maskedview.RNCMaskedViewPackage;
+// react-native-geolocation-service
+import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.RNGestureHandlerPackage;
+// react-native-location
+import com.github.reactnativecommunity.location.RNLocationPackage;
+// react-native-mmkv
+import com.reactnativemmkv.MmkvPackage;
 // react-native-reanimated
 import com.swmansion.reanimated.ReanimatedPackage;
 // react-native-safe-area-context
 import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
 // react-native-screens
 import com.swmansion.rnscreens.RNScreensPackage;
+// react-native-sms
+import com.tkporter.sendsms.SendSMSPackage;
 // react-native-splash-screen
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 
@@ -70,12 +82,18 @@ public class PackageList {
   public ArrayList<ReactPackage> getPackages() {
     return new ArrayList<>(Arrays.<ReactPackage>asList(
       new MainReactPackage(mConfig),
+      new AsyncStoragePackage(),
       new ReactCheckBoxPackage(),
+      new GeolocationPackage(),
       new RNCMaskedViewPackage(),
+      new RNFusedLocationPackage(),
       new RNGestureHandlerPackage(),
+      new RNLocationPackage(),
+      new MmkvPackage(),
       new ReanimatedPackage(),
       new SafeAreaContextPackage(),
       new RNScreensPackage(),
+      new SendSMSPackage(),
       new SplashScreenReactPackage()
     ));
   }

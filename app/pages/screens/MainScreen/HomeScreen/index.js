@@ -13,6 +13,9 @@ import {
     Image
 } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import RNLocation from 'react-native-location';
+import Geolocation from 'react-native-geolocation-service';
+import { getWeather, dailyForecast, showWeather, getLocation } from 'react-native-weather-api';
 import HomeListItem from "../../../../components/HomeListItem";
 
 import AlarmImage from '../../../../assets/images/alarm.png';
@@ -39,6 +42,43 @@ const Home = ({navigation}) => {
         uri: "https://reactjs.org/logo-og.png"
     };
 
+    RNLocation.configure({
+        distanceFilter: 5.0,
+        desiredAccuracy: {
+            ios: "best",
+            android: "highAccuracy"
+        },
+    });
+
+    RNLocation.requestPermission({
+        ios: "whenInUse",
+        android: {
+          detail: "fine"
+        }
+        }).then(granted => {
+            if (granted) {
+                Geolocation.getCurrentPosition(
+                    (position) => {
+                      console.log("Geolocation", position);
+                    },
+                    (error) => {
+                      // See error code charts below.
+                      console.log(error.code, error.message);
+                    },
+                    { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+                );
+
+                this.locationSubscription = RNLocation.subscribeToLocationUpdates(locations => {
+                    console.log(locations);
+            })
+          }
+        })
+
+        RNLocation.getLatestLocation({ timeout: 60000 })
+        .then(latestLocation => {
+            console.log("latest: ", latestLocation)
+          // Use the location here
+        })
     useEffect(() => {
         setListItem([
             [

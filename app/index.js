@@ -19,6 +19,7 @@ import { jwtRecoilState } from './recoil';
 
 LogBox.ignoreLogs([
     "Can't perform",
+    'new NativeEventEmitter',
 ])
 
 

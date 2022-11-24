@@ -7,11 +7,11 @@ import { NavigationContainer, StackActions } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import Main from '../screens/MainScreen';
 import Accident from '../screens/MainScreen/HomeScreen/Accident';
+import AdditionalReport from '../screens/MainScreen/HomeScreen/AdditionalReport';
 import { isLoginRecoilState, jwtRecoilState, severURLRecoilState, userIdxRecoilState } from '../../recoil';
 import { useRecoilState } from 'recoil';
 import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { mmkvStorage } from '../../utils/mmkv';
 
 const Stack = createNativeStackNavigator()
 
@@ -28,13 +28,13 @@ const Navigation = () => {
 
     useEffect(() => {
         getJwt();
+        setTimeout(() => console.log("timeout jwt"+jwt), 1000);
     }, [])
 
     const getJwt = async () => {
         console.log("getJwt")
 
-        const value = JSON.parse(await AsyncStorage.getItem("jwt"))
-        console.log("getJwt에서 JWT", AsyncStorage.getAllKeys())
+        const value = mmkvStorage.getString("jwt");
         try {
             console.log("value", value)
             if (value !== null) {
@@ -114,8 +114,9 @@ const Navigation = () => {
                                 screenOptions={{
                                     headerShown: false
                                 }}>
-                                <Stack.Screen name="Main" component={Main} />
-                                <Stack.Screen name="Accident" component={Accident} />
+                                <Stack.Screen name="Main" component={Main}/>
+                                <Stack.Screen name="Accident" component={Accident}/>
+                                <Stack.Screen name="AdditionalReport" component={AdditionalReport} />
                             </Stack.Group>
                         ))
                         : (
