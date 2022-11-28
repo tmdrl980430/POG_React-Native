@@ -34,10 +34,6 @@ const Login = ({ navigation }) => {
     const [userIdx, setUserIdx] = useRecoilState(userIdxRecoilState);
 
 
-    useEffect(() => {
-        storeJwt(jwt);
-    }, [jwt])
-
     const storeJwt = async (value) => {
         console.log("storeJwt")
         if (value == null || value == "") return;
