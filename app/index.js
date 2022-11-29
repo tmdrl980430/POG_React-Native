@@ -21,6 +21,7 @@ LogBox.ignoreLogs([
     "Can't perform",
     'new NativeEventEmitter',
 ])
+LogBox.ignoreAllLogs(true);
 
 
 const App = () => {
