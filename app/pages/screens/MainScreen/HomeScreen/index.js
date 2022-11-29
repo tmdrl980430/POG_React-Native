@@ -97,13 +97,13 @@ const Home = ({navigation}) => {
                 CartImage, "마켓"
             ],
             [
-                BlankImage, "30초"
+                BlankImage, "경상해 사고"
             ],
             [
-                BlankImage, "15초"
+                BlankImage, "중상해 사고"
             ],
             [
-                BlankImage, "10초"
+                BlankImage, "치명적 사고"
             ]
         ]);
         setEducationList([1, 2, 3, 4])
